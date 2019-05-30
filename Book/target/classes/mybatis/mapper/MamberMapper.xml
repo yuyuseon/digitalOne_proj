@@ -4,43 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="qna.QnAImpl">	
-	<select id="getQnAListInfo" resultType="model.QnADTO" parameterType="String">
-		SELECT * FROM (
-			SELECT tb.*, rowNum rNum FROM (
-				SELECT * FROM (
-					SELECT * FROM QNA_BBS 
-					<if test="search_value!=null and !search_value.equals('')">
-					WHERE ${search_column} LIKE '%${search_value}%'
-					</if>
-				)ORDER BY state asc, bgroup desc, bindent asc
-			) tb 
-		) WHERE rNum BETWEEN ${start} AND ${end}
-	</select>
-	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) FROM QNA_BBS
-	</select>
-	<select id="searchOrganCount" resultType="int">
-		SELECT COUNT(*) FROM QNA_BBS WHERE ${param1} LIKE '%${param2}%' 
-	</select>
-	<select id="searchQnaList" resultType="model.QnADTO" parameterType="String">
-		SELECT * FROM (
-			SELECT * FROM QNA_BBS WHERE id LIKE '%${param1}%' and title LIKE '%${param2}%'
-		) ORDER BY idx DESC
-	</select>
+<mapper namespace="impl.memberImpl">	
 
-	<select id="getQnAInfo" resultType="model.QnADTO" parameterType="String">
-		SELECT * FROM QNA_BBS WHERE idx=#{param1}
-	</select>
-
-	
-	<insert id="getQnAWrit" parameterType="model.QnADTO" >
-		INSERT INTO QNA_BBS (IDX,TITLE,CONTENT,ID,VISITCOUNT,STATE,BGROUP,BINDENT) 
-			VALUES(qna_seq.NEXTVAL, #{title}, #{content}, #{id}, '0', '0', qna_seq.NEXTVAL, '0')
-	</insert>
-	
-	<delete id="getQnADelete" parameterType="String">
-		DELETE FROM QNA_BBS WHERE idx=#{0} AND id=#{1}
-	</delete>
 	
 </mapper>
