@@ -21,6 +21,7 @@
   	</div>
 	
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<%@ include file="/resources/common/commonFooter.jsp" %>
 	
 	<%@ include file="/resources/common/commonScript.jsp" %>
 </body>
